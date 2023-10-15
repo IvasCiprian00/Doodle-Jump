@@ -46,6 +46,14 @@ public class Player : MonoBehaviour
             transform.Translate(transform.right * speed * Time.deltaTime);
         }
 
+        if(transform.position.x < -3.62f)
+        {
+            transform.position = new Vector3(3.62f, transform.position.y, transform.position.z);
+        }
+        if (transform.position.x > 3.62f)
+        {
+            transform.position = new Vector3(-3.62f, transform.position.y, transform.position.z);
+        }
 
         if (isAscending)
         {
