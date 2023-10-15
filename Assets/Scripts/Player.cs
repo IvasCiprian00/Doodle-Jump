@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Player : MonoBehaviour
 {
@@ -22,14 +23,16 @@ public class Player : MonoBehaviour
         Movement();
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.gameObject.tag == "Platform")
+        if (col.gameObject.tag == "Platform")
         {
+            rigidBody2D.velocity = new Vector2(0f, 0f);
             rigidBody2D.AddForce(transform.up * jumpForce);
             StartJump(true);
         }
     }
+
 
     void Movement()
     {
@@ -38,11 +41,11 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftArrow)) {
             transform.Translate(-transform.right * speed * Time.deltaTime);
         }
-
         if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.Translate(transform.right * speed * Time.deltaTime);
         }
+
 
         if (isAscending)
         {
@@ -62,7 +65,17 @@ public class Player : MonoBehaviour
 
     IEnumerator EndJump()
     {
-        yield return new WaitForSeconds(0.5f);
+        float pastPosition;
+
+        while (true)
+        {
+            pastPosition = transform.position.y;
+            yield return new WaitForSeconds(0.01f);
+            if(pastPosition > transform.position.y)
+            {
+                break;
+            }
+        }
         isAscending = false;
     }
 }
