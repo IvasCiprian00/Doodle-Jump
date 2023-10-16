@@ -17,10 +17,11 @@ public class Player : MonoBehaviour
     [SerializeField]
     private BoxCollider2D boxCollider2D;
 
-    private bool isAscending = false;
+    public bool isAscending = false;
     void Update()
     {
         Movement();
+
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -32,7 +33,6 @@ public class Player : MonoBehaviour
             StartJump(true);
         }
     }
-
 
     void Movement()
     {
