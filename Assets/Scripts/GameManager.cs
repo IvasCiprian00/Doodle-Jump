@@ -26,5 +26,11 @@ public class GameManager : MonoBehaviour
             background.transform.position = new Vector3(background.transform.position.x, height, background.transform.position.z);
             cam.transform.position = new Vector3 (cam.transform.position.x, height, cam.transform.position.z);
         }
+
+        if(player.transform.position.y < background.transform.position.y -6f)
+        {
+            Debug.Log("GAME OVER");
+            Destroy(player);
+        }
     }
 }

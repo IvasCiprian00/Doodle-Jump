@@ -21,7 +21,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
-
     }
 
     private void OnTriggerEnter2D(Collider2D col)
