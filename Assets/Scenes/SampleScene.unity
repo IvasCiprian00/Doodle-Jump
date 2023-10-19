@@ -452,6 +452,7 @@ MonoBehaviour:
   background: {fileID: 1375723827}
   maximumSpawnInterval: 0.2
   nextPlatformPosition: 0
+  enemy: {fileID: 6998531026203038111, guid: 672775637499a5a4bae32d0182552218, type: 3}
 --- !u!1 &1375723827
 GameObject:
   m_ObjectHideFlags: 0

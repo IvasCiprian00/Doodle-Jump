@@ -11,24 +11,30 @@ public class SpawnManager : MonoBehaviour
     private GameObject background;
 
     [SerializeField]
-    private float maximumSpawnInterval = 0.3f;
+    private float maximumSpawnInterval = 0.2f;
 
     [SerializeField]
     private float nextPlatformPosition = 0f;
+
+    [SerializeField]
+    private GameObject enemy;
 
     private float xPosition;
 
     private void Update()
     {
-        if(GameObject.Find("Player") != null)
+        if (GameObject.Find("Player") != null)
         {
-            Debug.Log("S");
             if(nextPlatformPosition < background.transform.position.y)
             {
-                nextPlatformPosition += Random.Range(0.1f, maximumSpawnInterval);
+                nextPlatformPosition += Random.Range(0.05f, maximumSpawnInterval);
                 if (background.transform.position.y >= nextPlatformPosition)
                 {
                     xPosition = Random.Range(-2.4f, 2.4f);
+                    if(Random.Range(0, 10) == 1)
+                    {
+                        Instantiate(enemy, new Vector3(xPosition, background.transform.position.y + 5.8f, platform.transform.position.z), Quaternion.identity);
+                    }
                     Instantiate(platform, new Vector3(xPosition, background.transform.position.y + 5.2f, platform.transform.position.z), Quaternion.identity);
                 }
             }

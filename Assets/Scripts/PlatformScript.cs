@@ -7,6 +7,7 @@ public class PlatformScript : MonoBehaviour
     [SerializeField]
     private GameObject background;
 
+
     private void Start()
     {
         background = GameObject.Find("Background");
