@@ -6,6 +6,13 @@ public class EntityClass : MonoBehaviour
 {
     private float despawnThreshold;
 
+    public GameObject background;
+
+    private void Start()
+    {
+        background = GameObject.Find("Background");
+    }
+
     public void SetDespawnThreshold(float threshold)
     {
         despawnThreshold = threshold;

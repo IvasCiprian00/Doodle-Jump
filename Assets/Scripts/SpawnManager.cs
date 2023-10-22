@@ -33,7 +33,7 @@ public class SpawnManager : MonoBehaviour
                     xPosition = Random.Range(-2.4f, 2.4f);
                     if (Random.Range(0, 10) == 1)
                     {
-                        Instantiate(enemy, new Vector3(xPosition, background.transform.position.y + 5.8f, platform.transform.position.z), Quaternion.identity);
+                        Instantiate(enemy, new Vector3(xPosition, background.transform.position.y + 5.6f, platform.transform.position.z), Quaternion.identity);
                     }
                     Instantiate(platform, new Vector3(xPosition, background.transform.position.y + 5.2f, platform.transform.position.z), Quaternion.identity);
                 }
