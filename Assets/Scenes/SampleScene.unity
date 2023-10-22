@@ -329,6 +329,99 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9a7ad2c389a5144eb27289aac35bb84, type: 3}
+--- !u!1 &862927472
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 862927473}
+  - component: {fileID: 862927475}
+  - component: {fileID: 862927474}
+  m_Layer: 0
+  m_Name: Legs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &862927473
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862927472}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1683437156}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &862927474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862927472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010b197491ce69145930a90ca426f598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1683437158}
+  playerRigidbody: {fileID: 0}
+  jumpForce: 550
+--- !u!61 &862927475
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862927472}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.49306393}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.12320304}
+  m_EdgeRadius: 0
 --- !u!1001 &1019951890
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,7 +732,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &1683437155
 SpriteRenderer:
@@ -705,7 +798,8 @@ Transform:
   m_LocalPosition: {x: -1.39, y: 0.11, z: -1}
   m_LocalScale: {x: 0.9902, y: 0.9902, z: 0.9902}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 862927473}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1683437158
@@ -721,9 +815,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigidBody2D: {fileID: 1683437154}
-  jumpForce: 550
   speed: 10
   boxCollider2D: {fileID: 1683437159}
+  legsCollider: {fileID: 0}
   isAscending: 0
 --- !u!61 &1683437159
 BoxCollider2D:
@@ -732,7 +826,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1683437153}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -1009,6 +1103,14 @@ PrefabInstance:
     - target: {fileID: 6484042211537072373, guid: d9a7ad2c389a5144eb27289aac35bb84, type: 3}
       propertyPath: m_Name
       value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807240889771481338, guid: d9a7ad2c389a5144eb27289aac35bb84, type: 3}
+      propertyPath: m_Size.y
+      value: 2.0544746
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807240889771481338, guid: d9a7ad2c389a5144eb27289aac35bb84, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.027237296
       objectReference: {fileID: 0}
     - target: {fileID: 7596507672509751328, guid: d9a7ad2c389a5144eb27289aac35bb84, type: 3}
       propertyPath: m_LocalPosition.x

@@ -20,17 +20,21 @@ public class GameManager : MonoBehaviour
     private float height;
     private void Update()
     {
-        height = player.transform.position.y;
-        if(playerScript.isAscending && height > background.transform.position.y)
+        if (player != null)
         {
-            background.transform.position = new Vector3(background.transform.position.x, height, background.transform.position.z);
-            cam.transform.position = new Vector3 (cam.transform.position.x, height, cam.transform.position.z);
-        }
+            height = player.transform.position.y;
+            if (playerScript.isAscending && height > background.transform.position.y)
+            {
+                background.transform.position = new Vector3(background.transform.position.x, height, background.transform.position.z);
+                cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
+            }
 
-        if(player.transform.position.y < background.transform.position.y -6f)
-        {
-            Debug.Log("GAME OVER");
-            Destroy(player);
+            if (player.transform.position.y < background.transform.position.y - 6f)
+            {
+                Debug.Log("GAME OVER");
+                Destroy(player);
+            }
+
         }
     }
 }

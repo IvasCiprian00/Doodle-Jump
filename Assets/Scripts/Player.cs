@@ -9,29 +9,26 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidBody2D;
 
     [SerializeField]
-    private float jumpForce;
-
-    [SerializeField]
     private float speed;
 
     [SerializeField]
     private BoxCollider2D boxCollider2D;
 
+    [SerializeField]
+    private BoxCollider2D legsCollider;
+
     public bool isAscending = false;
+
+
+    private void Start()
+    {
+        legsCollider = GameObject.Find("Legs").GetComponent<BoxCollider2D>();
+    }
     void Update()
     {
         Movement();
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "Platform")
-        {
-            rigidBody2D.velocity = new Vector2(0f, 0f);
-            rigidBody2D.AddForce(transform.up * jumpForce);
-            StartJump(true);
-        }
-    }
 
     void Movement()
     {
@@ -56,15 +53,15 @@ public class Player : MonoBehaviour
 
         if (isAscending)
         {
-            boxCollider2D.enabled = false;
+            legsCollider.enabled = false;
         }
         else
         {
-            boxCollider2D.enabled = true;
+            legsCollider.enabled = true;
         }
     }
 
-    void StartJump(bool condition)
+    public void StartJump(bool condition)
     {
         isAscending = condition;
         StartCoroutine(EndJump());
