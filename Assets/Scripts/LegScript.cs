@@ -26,5 +26,13 @@ public class LegScript : MonoBehaviour
             playerRigidbody.AddForce(transform.up * jumpForce);
             player.StartJump(true);
         }
+
+        if(col.gameObject.tag == "Enemy_Head")
+        {
+            playerRigidbody.velocity = new Vector2(0f, 0f);
+            playerRigidbody.AddForce(transform.up * jumpForce);
+            player.StartJump(true);
+            Destroy(col.transform.parent.gameObject);
+        }
     }
 }

@@ -29,7 +29,6 @@ public class Player : MonoBehaviour
         Movement();
     }
 
-
     void Movement()
     {
         transform.eulerAngles = new Vector3(0, 0, 0);
@@ -81,5 +80,14 @@ public class Player : MonoBehaviour
             }
         }
         isAscending = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            Debug.Log("Game Over");
+        }
     }
 }
