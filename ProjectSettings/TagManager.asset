@@ -7,6 +7,8 @@ TagManager:
   - Platform
   - Enemy_Head
   - Enemy
+  - Propeller
+  - Jetpack
   layers:
   - Default
   - TransparentFX

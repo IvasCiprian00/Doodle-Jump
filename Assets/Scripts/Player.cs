@@ -6,16 +6,19 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbody2D rigidBody2D;
-
-    [SerializeField]
     private float speed;
 
     [SerializeField]
-    private BoxCollider2D boxCollider2D;
+    private BoxCollider2D legsCollider;
 
     [SerializeField]
-    private BoxCollider2D legsCollider;
+    private GameObject propeller;
+
+    [SerializeField]
+    private GameObject jetpack;
+
+    [SerializeField]
+    private BoxCollider2D boxCollider;
 
     public bool isAscending = false;
 
@@ -66,6 +69,26 @@ public class Player : MonoBehaviour
         StartCoroutine(EndJump());
     }
 
+    private void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            Destroy(gameObject);
+            Debug.Log("Game Over");
+        }
+
+        if (col.gameObject.tag == "Propeller")
+        {
+            Destroy(col.gameObject);
+            StartCoroutine(CollectPropeller());
+        }
+
+        if (col.gameObject.tag == "Jetpack")
+        {
+            Destroy(col.gameObject);
+            jetpack.SetActive(true);
+        }
+    }
     IEnumerator EndJump()
     {
         float pastPosition;
@@ -74,7 +97,7 @@ public class Player : MonoBehaviour
         {
             pastPosition = transform.position.y;
             yield return new WaitForSeconds(0.01f);
-            if(pastPosition > transform.position.y)
+            if (pastPosition > transform.position.y)
             {
                 break;
             }
@@ -82,12 +105,20 @@ public class Player : MonoBehaviour
         isAscending = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D col)
+    IEnumerator CollectPropeller()
     {
-        if (col.gameObject.tag == "Enemy")
+        yield return new WaitForSeconds(0.5f);
+        propeller.SetActive(true);
+        boxCollider.enabled = false;
+        //float propellerDuration = 0f;
+        for(int i = 0; i < 10; i++)
         {
-            Destroy(gameObject);
-            Debug.Log("Game Over");
+            transform.Translate(transform.up);
+            yield return new WaitForSeconds(0.01f);
+            //propellerDuration += Time.deltaTime;
+            //Debug.Log(propellerDuration);
         }
+        boxCollider.enabled = true;
+        propeller.SetActive(false);
     }
 }
