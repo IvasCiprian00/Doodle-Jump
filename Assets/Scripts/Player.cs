@@ -24,6 +24,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     [SerializeField]
+    private bool jetpackIsActive = false;
+
+    [SerializeField]
     private bool propellerIsActive = false;
 
     public bool isAscending = false;
@@ -40,6 +43,11 @@ public class Player : MonoBehaviour
         if (propellerIsActive)
         {
             transform.Translate(transform.up * speed * Time.deltaTime);
+        }
+
+        if (jetpackIsActive)
+        {
+            transform.Translate(transform.up * speed * 3 * Time.deltaTime);
         }
     }
 
@@ -97,7 +105,7 @@ public class Player : MonoBehaviour
         if (col.gameObject.tag == "Jetpack")
         {
             Destroy(col.gameObject);
-            jetpack.SetActive(true);
+            StartCoroutine(CollectJetpack());
         }
     }
 
@@ -124,10 +132,27 @@ public class Player : MonoBehaviour
         boxCollider.enabled = false;
         propellerIsActive = true;
         rigidbody.simulated = false;
+        isAscending = true;
         yield return new WaitForSeconds(5f);
+        isAscending = false;
         propellerIsActive = false;
         rigidbody.simulated = true;
         boxCollider.enabled = true;
         propeller.SetActive(false);
+    }
+
+    IEnumerator CollectJetpack()
+    {
+        jetpack.SetActive(true);
+        boxCollider.enabled = false;
+        jetpackIsActive = true;
+        rigidbody.simulated = false;
+        isAscending = true;
+        yield return new WaitForSeconds(3f);
+        isAscending = false;
+        jetpackIsActive = false;
+        rigidbody.simulated = true;
+        boxCollider.enabled = true;
+        jetpack.SetActive(false);
     }
 }
