@@ -1048,6 +1048,8 @@ MonoBehaviour:
   propeller: {fileID: 1548503385}
   jetpack: {fileID: 132131535}
   boxCollider: {fileID: 1683437159}
+  rigidbody: {fileID: 1683437154}
+  propellerIsActive: 0
   isAscending: 0
 --- !u!61 &1683437159
 BoxCollider2D:

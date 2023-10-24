@@ -20,6 +20,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private BoxCollider2D boxCollider;
 
+    [SerializeField]
+    private Rigidbody2D rigidbody;
+
+    [SerializeField]
+    private bool propellerIsActive = false;
+
     public bool isAscending = false;
 
 
@@ -30,6 +36,11 @@ public class Player : MonoBehaviour
     void Update()
     {
         Movement();
+
+        if (propellerIsActive)
+        {
+            transform.Translate(transform.up * speed * Time.deltaTime);
+        }
     }
 
     void Movement()
@@ -89,6 +100,8 @@ public class Player : MonoBehaviour
             jetpack.SetActive(true);
         }
     }
+
+
     IEnumerator EndJump()
     {
         float pastPosition;
@@ -107,17 +120,13 @@ public class Player : MonoBehaviour
 
     IEnumerator CollectPropeller()
     {
-        yield return new WaitForSeconds(0.5f);
         propeller.SetActive(true);
         boxCollider.enabled = false;
-        //float propellerDuration = 0f;
-        for(int i = 0; i < 10; i++)
-        {
-            transform.Translate(transform.up);
-            yield return new WaitForSeconds(0.01f);
-            //propellerDuration += Time.deltaTime;
-            //Debug.Log(propellerDuration);
-        }
+        propellerIsActive = true;
+        rigidbody.simulated = false;
+        yield return new WaitForSeconds(5f);
+        propellerIsActive = false;
+        rigidbody.simulated = true;
         boxCollider.enabled = true;
         propeller.SetActive(false);
     }

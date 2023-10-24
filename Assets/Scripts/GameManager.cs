@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         if (player != null)
         {
             height = player.transform.position.y;
-            if (playerScript.isAscending && height > background.transform.position.y)
+            if (height > background.transform.position.y)
             {
                 background.transform.position = new Vector3(background.transform.position.x, height, background.transform.position.z);
                 cam.transform.position = new Vector3(cam.transform.position.x, height, cam.transform.position.z);
