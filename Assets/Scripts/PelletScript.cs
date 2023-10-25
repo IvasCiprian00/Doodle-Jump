@@ -33,4 +33,14 @@ public class PelletScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Debug.Log("LEGO");
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
+    }
 }

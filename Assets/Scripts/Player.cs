@@ -50,19 +50,24 @@ public class Player : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && canShoot)
         {
-            if(Input.mousePosition.x >= 3f && Input.mousePosition.x <= 180f)
-            {
-                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(7, new Vector3 (0, 0, 1)));
-            }
-            if (Input.mousePosition.x > 180f && Input.mousePosition.x <= 360f)
-            {
-                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.identity);
-            }
-            if (Input.mousePosition.x > 360f && Input.mousePosition.x <= 558f)
-            {
-                Debug.Log("Shoot right");
-                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(-7, new Vector3(0, 0, 1)));
-            }
+            ShootPellet();
+            
+        }
+    }
+
+    private void ShootPellet()
+    {
+        if (Input.mousePosition.x >= 3f && Input.mousePosition.x <= 180f)
+        {
+            Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(7, new Vector3(0, 0, 1)));
+        }
+        if (Input.mousePosition.x > 180f && Input.mousePosition.x <= 360f)
+        {
+            Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.identity);
+        }
+        if (Input.mousePosition.x > 360f && Input.mousePosition.x <= 558f)
+        {
+            Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(-7, new Vector3(0, 0, 1)));
         }
     }
 
