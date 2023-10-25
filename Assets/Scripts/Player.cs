@@ -171,6 +171,7 @@ public class Player : MonoBehaviour
         isAscending = false;
         propellerIsActive = false;
         rigidbody.simulated = true;
+        rigidbody.AddForce(transform.up * 500);
         boxCollider.enabled = true;
         canShoot = true;
         propeller.SetActive(false);
@@ -188,6 +189,7 @@ public class Player : MonoBehaviour
         isAscending = false;
         jetpackIsActive = false;
         rigidbody.simulated = true;
+        rigidbody.AddForce(transform.up * 1000);
         boxCollider.enabled = true;
         canShoot = true;
         jetpack.SetActive(false);

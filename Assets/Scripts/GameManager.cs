@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private float height;
+
     private void Update()
     {
         if (player != null)
@@ -37,5 +38,10 @@ public class GameManager : MonoBehaviour
             }
 
         }
+    }
+
+    public int GetHeight()
+    {
+        return (int) background.transform.position.y;
     }
 }
