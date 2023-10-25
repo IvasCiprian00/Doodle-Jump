@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField]
-    private float speed;
-
     [SerializeField]
     private BoxCollider2D legsCollider;
 
@@ -24,12 +22,20 @@ public class Player : MonoBehaviour
     private Rigidbody2D rigidbody;
 
     [SerializeField]
+    private GameObject pellet;
+
+    [SerializeField]
+    private float speed;
+
+    [SerializeField]
     private bool jetpackIsActive = false;
 
     [SerializeField]
     private bool propellerIsActive = false;
 
     public bool isAscending = false;
+
+    private bool canShoot = true;
 
 
     private void Start()
@@ -40,6 +46,28 @@ public class Player : MonoBehaviour
     {
         Movement();
 
+        CheckPowerUp();
+
+        if (Input.GetMouseButtonDown(0) && canShoot)
+        {
+            if(Input.mousePosition.x >= 3f && Input.mousePosition.x <= 180f)
+            {
+                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(7, new Vector3 (0, 0, 1)));
+            }
+            if (Input.mousePosition.x > 180f && Input.mousePosition.x <= 360f)
+            {
+                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.identity);
+            }
+            if (Input.mousePosition.x > 360f && Input.mousePosition.x <= 558f)
+            {
+                Debug.Log("Shoot right");
+                Instantiate(pellet, new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z), Quaternion.AngleAxis(-7, new Vector3(0, 0, 1)));
+            }
+        }
+    }
+
+    void CheckPowerUp()
+    {
         if (propellerIsActive)
         {
             transform.Translate(transform.up * speed * Time.deltaTime);
@@ -129,6 +157,7 @@ public class Player : MonoBehaviour
     IEnumerator CollectPropeller()
     {
         propeller.SetActive(true);
+        canShoot = false;
         boxCollider.enabled = false;
         propellerIsActive = true;
         rigidbody.simulated = false;
@@ -138,12 +167,14 @@ public class Player : MonoBehaviour
         propellerIsActive = false;
         rigidbody.simulated = true;
         boxCollider.enabled = true;
+        canShoot = true;
         propeller.SetActive(false);
     }
 
     IEnumerator CollectJetpack()
     {
         jetpack.SetActive(true);
+        canShoot = false;
         boxCollider.enabled = false;
         jetpackIsActive = true;
         rigidbody.simulated = false;
@@ -153,6 +184,7 @@ public class Player : MonoBehaviour
         jetpackIsActive = false;
         rigidbody.simulated = true;
         boxCollider.enabled = true;
+        canShoot = true;
         jetpack.SetActive(false);
     }
 }
