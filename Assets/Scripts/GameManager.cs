@@ -14,10 +14,10 @@ public class GameManager : MonoBehaviour
     private Camera cam;
 
     [SerializeField]
-    private Player playerScript;
+    private float height;
 
     [SerializeField]
-    private float height;
+    private bool gameIsOver = false;
 
     private void Update()
     {
@@ -33,8 +33,8 @@ public class GameManager : MonoBehaviour
 
             if (player.transform.position.y < background.transform.position.y - 6f)
             {
-                Debug.Log("GAME OVER");
                 Destroy(player);
+                gameIsOver = true;
             }
 
         }
@@ -43,5 +43,10 @@ public class GameManager : MonoBehaviour
     public int GetHeight()
     {
         return (int) background.transform.position.y;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameIsOver;
     }
 }
